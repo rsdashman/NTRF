@@ -1,10 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Meu site no GitHub</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Site com Neve e Download</title>
+<style>
+  /* Estilo básico e tema de neve */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #0074D9);
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  header {
+    padding: 1rem;
+    text-align: center;
+    background: rgba(0,0,0,0.3);
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  /* Tabs */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  .tab-btn {
+    background: rgba(255 255 255 / 0.2);
+    border: none;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    border-radius: 6px 6px 0 0;
+    transition: background 0.3s ease;
+  }
+  .tab-btn.active {
+    background: rgba(255 255 255 / 0.7);
+    color: #0074D9;
+    font-weight: bold;
+  }
+  .tab-content {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem 2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    border-radius: 0 6px 6px 6px;
+    min-height: 250px;
+  }
+  /* Botões de download */
+  .download-btn {
+    background: #0074D9;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    margin: 0.8rem 1rem 0 0;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  .download-btn:hover {
+    background: #005fa3;
+  }
+  /* Textarea para scripts */
+  textarea {
+    width: 100%;
+    height: 180px;
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+    border: none;
+    resize: vertical;
+    background: rgba(255 255 255 / 0.9);
+    color: #222;
+  }
+  /* Snowflakes */
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+    font-size: 1rem;
+    z-index: 9999;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
 </head>
 <body>
-  <h1>Olá, mundo!</h1>
-  <p>Meu primeiro site no GitHub Pages.</p>
+
+<header>Site com Neve e Downloads</header>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="downloads">Downloads</button>
+  <button class="tab-btn" data-tab="scripts">Scripts</button>
+</div>
+
+<div id="downloads" class="tab-content">
+  <button class="download-btn" data-file="arquivo1.txt">Download Arquivo 1</button>
+  <button class="download-btn" data-file="arquivo2.txt">Download Arquivo 2</button>
+  <button class="download-btn" data-file="arquivo3.txt">Download Arquivo 3</button>
+  <p id="link-container" style="margin-top:1rem;"></p>
+</div>
+
+<div id="scripts" class="tab-content" style="display:none;">
+  <textarea placeholder="Cole seus scripts aqui para desenvolvimento..."></textarea>
+</div>
+
+<script>
+  // Tabs
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = {
+    downloads: document.getElementById('downloads'),
+    scripts: document.getElementById('scripts')
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const tabName = tab.getAttribute('data-tab');
+      for (const key in contents) {
+        contents[key].style.display = (key === tabName) ? 'block' : 'none';
+      }
+    });
+  });
+
+  // Função para criar link de download
+  function createDownloadLink(filename) {
+    // Exemplo: conteúdo simples para arquivo de texto
+    const fileContent = `Conteúdo do arquivo ${filename}\nGerado em: ${new Date().toLocaleString()}`;
+    const blob = new Blob([fileContent], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+
+    return url;
+  }
+
+  // Botões de download
+  const downloadButtons = document.querySelectorAll('.download-btn');
+  const linkContainer = document.getElementById('link-container');
+
+  downloadButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filename = btn.getAttribute('data-file');
+      const url = createDownloadLink(filename);
+
+      // Limpa e cria um link para download
+      linkContainer.innerHTML = `<a href="${url}" download="${filename}" style="color:#00ffcc; font-weight:bold;">Clique aqui para baixar ${filename}</a>`;
+    });
+  });
+
+  // Neve caindo
+  function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.style.left = Math.random() * window.innerWidth + 'px';
+    snowflake.style.fontSize = (10 + Math.random() * 20) + 'px';
+    snowflake.style.animationDuration = (5 + Math.random() * 5) + 's';
+    snowflake.style.opacity = Math.random();
+
+    snowflake.textContent = '❄';
+
+    document.body.appendChild(snowflake);
+
+    // Remove snowflake depois da animação
+    setTimeout(() => {
+      snowflake.remove();
+    }, 10000);
+  }
+
+  setInterval(createSnowflake, 200);
+</script>
+
 </body>
 </html>
