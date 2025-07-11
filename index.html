@@ -1,310 +1,192 @@
-<!DOCTYPE html>
-<html lang="pt-BR" >
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>❄️ NTRF </title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+body, html {
+  margin: 0; padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Poppins', sans-serif;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  user-select: none;
+}
 
-    * {
-      box-sizing: border-box;
-    }
-    body, html {
-      margin: 0; padding: 0;
-      height: 100%;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      font-family: 'Poppins', sans-serif;
-      color: #f0f0f0;
-      overflow-x: hidden;
-      user-select: none;
-    }
+.container {
+  max-width: 720px;
+  margin: 3rem auto 4rem;
+  background: rgba(255 255 255 / 0.08);
+  padding: 2rem 2.5rem 3rem;
+  border-radius: 15px;
+  box-shadow:
+    0 8px 24px rgb(0 0 0 / 0.3),
+    inset 0 0 100px rgb(255 255 255 / 0.05);
+  backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 10;
+}
 
+header {
+  text-align: center;
+  font-weight: 600;
+  font-size: 2.8rem;
+  margin-bottom: 1.3rem;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 12px rgba(255,255,255,0.8);
+}
 
-    .container {
-      max-width: 720px;
-      margin: 3rem auto 4rem;
-      background: rgba(255 255 255 / 0.08);
-      padding: 2rem 2.5rem 3rem;
-      border-radius: 15px;
-      box-shadow:
-        0 8px 24px rgb(0 0 0 / 0.3),
-        inset 0 0 100px rgb(255 255 255 / 0.05);
-      backdrop-filter: blur(6px);
-      position: relative;
-      z-index: 10;
-    }
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.tab-btn {
+  background: transparent;
+  border: 2px solid rgba(255 255 255 / 0.3);
+  color: #cde6f8;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.7rem 1.8rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+  box-shadow: 0 0 4px rgba(255 255 255 / 0.1);
+  user-select: none;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+}
+.tab-btn:hover {
+  background-color: rgba(255 255 255 / 0.2);
+  border-color: #69aaff;
+  color: #def0ff;
+  box-shadow:
+    0 0 6px #69aaff,
+    0 0 12px #69aaff;
+}
+.tab-btn.active {
+  background-color: #69aaff;
+  color: #0f1f33;
+  border-color: #69aaff;
+  box-shadow:
+    0 0 12px #69aaff,
+    0 0 25px #69aaff;
+}
 
+.tab-content {
+  animation: fadeIn 0.4s ease forwards;
+}
+.tab-content[hidden] {
+  display: none;
+  animation: none;
+}
 
-    header {
-      text-align: center;
-      font-weight: 600;
-      font-size: 2.8rem;
-      margin-bottom: 1.3rem;
-      letter-spacing: 0.06em;
-      text-shadow: 0 0 12px rgba(255,255,255,0.8);
-    }
+.download-btn {
+  background: linear-gradient(145deg, #4477ff, #3059d6);
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.85rem 2rem;
+  margin: 0.7rem 1.2rem 0 0;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 8px rgb(68 119 255 / 0.5),
+    inset 0 -3px 6px rgb(30 68 155 / 0.7);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.15s ease;
+  user-select: none;
+}
+.download-btn:hover {
+  background: linear-gradient(145deg, #568dff, #3d6cd8);
+  box-shadow:
+    0 6px 15px rgb(86 141 255 / 0.9),
+    inset 0 -5px 10px rgb(40 85 210 / 0.8);
+  transform: translateY(-2px);
+}
+.download-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 3px 7px rgb(86 141 255 / 0.7),
+    inset 0 -2px 5px rgb(40 85 210 / 0.6);
+}
 
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .tab-btn {
-      background: transparent;
-      border: 2px solid rgba(255 255 255 / 0.3);
-      color: #cde6f8;
-      font-weight: 600;
-      font-size: 1.1rem;
-      padding: 0.7rem 1.8rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition:
-        background-color 0.3s ease,
-        border-color 0.3s ease,
-        color 0.3s ease;
-      box-shadow: 0 0 4px rgba(255 255 255 / 0.1);
-      user-select: none;
-      filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
-    }
-    .tab-btn:hover {
-      background-color: rgba(255 255 255 / 0.2);
-      border-color: #69aaff;
-      color: #def0ff;
-      box-shadow:
-        0 0 6px #69aaff,
-        0 0 12px #69aaff;
-    }
-    .tab-btn.active {
-      background-color: #69aaff;
-      color: #0f1f33;
-      border-color: #69aaff;
-      box-shadow:
-        0 0 12px #69aaff,
-        0 0 25px #69aaff;
-    }
+#link-container {
+  margin-top: 1.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #a7d4ff;
+  user-select: text;
+  word-break: break-word;
+}
+#link-container a {
+  color: #a7d4ff;
+  text-decoration: none;
+  border-bottom: 1.5px dashed #a7d4ff;
+  transition: color 0.3s ease;
+}
+#link-container a:hover {
+  color: #f0f9ff;
+  border-color: #f0f9ff;
+}
 
+textarea {
+  width: 100%;
+  min-height: 240px;
+  padding: 1.2rem 1.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 2px solid rgba(255 255 255 / 0.2);
+  background: rgba(255 255 255 / 0.15);
+  color: #e8f0fe;
+  resize: vertical;
+  outline-offset: 2px;
+  transition: border-color 0.3s ease;
+  user-select: text;
+}
+textarea::placeholder {
+  color: #cdd7f7aa;
+  font-style: italic;
+}
+textarea:focus {
+  border-color: #69aaff;
+  background: rgba(255 255 255 / 0.3);
+  color: #fff;
+}
 
-    .tab-content {
-      animation: fadeIn 0.4s ease forwards;
-    }
-    .tab-content[hidden] {
-      display: none;
-      animation: none;
-    }
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 
-
-    .download-btn {
-      background: linear-gradient(145deg, #4477ff, #3059d6);
-      border: none;
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      padding: 0.85rem 2rem;
-      margin: 0.7rem 1.2rem 0 0;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow:
-        0 4px 8px rgb(68 119 255 / 0.5),
-        inset 0 -3px 6px rgb(30 68 155 / 0.7);
-      transition:
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        transform 0.15s ease;
-      user-select: none;
-    }
-    .download-btn:hover {
-      background: linear-gradient(145deg, #568dff, #3d6cd8);
-      box-shadow:
-        0 6px 15px rgb(86 141 255 / 0.9),
-        inset 0 -5px 10px rgb(40 85 210 / 0.8);
-      transform: translateY(-2px);
-    }
-    .download-btn:active {
-      transform: translateY(1px);
-      box-shadow:
-        0 3px 7px rgb(86 141 255 / 0.7),
-        inset 0 -2px 5px rgb(40 85 210 / 0.6);
-    }
-
-    /* Link para download */
-    #link-container {
-      margin-top: 1.6rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #a7d4ff;
-      user-select: text;
-      word-break: break-word;
-    }
-    #link-container a {
-      color: #a7d4ff;
-      text-decoration: none;
-      border-bottom: 1.5px dashed #a7d4ff;
-      transition: color 0.3s ease;
-    }
-    #link-container a:hover {
-      color: #f0f9ff;
-      border-color: #f0f9ff;
-    }
-
-
-    textarea {
-      width: 100%;
-      min-height: 240px;
-      padding: 1.2rem 1.5rem;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1rem;
-      border-radius: 15px;
-      border: 2px solid rgba(255 255 255 / 0.2);
-      background: rgba(255 255 255 / 0.15);
-      color: #e8f0fe;
-      resize: vertical;
-      outline-offset: 2px;
-      transition: border-color 0.3s ease;
-      user-select: text;
-    }
-    textarea::placeholder {
-      color: #cdd7f7aa;
-      font-style: italic;
-    }
-    textarea:focus {
-      border-color: #69aaff;
-      background: rgba(255 255 255 / 0.3);
-      color: #fff;
-    }
-
-    /* Animação de fade in */
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    /* Neve caindo */
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      color: white;
-      user-select: none;
-      pointer-events: none;
-      font-size: 1.2rem;
-      z-index: 9999;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      filter: drop-shadow(0 0 1.5px #e6f1ff);
-      opacity: 0.9;
-    }
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container" role="main" aria-label="Site com neve caindo e downloads">
-
-    <header>❄️ NTRF - Neve & Downloads</header>
-
-    <nav class="tabs" role="tablist" aria-label="Navegação principal">
-      <button role="tab" aria-selected="true" aria-controls="downloads" id="tab-downloads" class="tab-btn active" data-tab="downloads" tabindex="0">Downloads</button>
-      <button role="tab" aria-selected="false" aria-controls="scripts" id="tab-scripts" class="tab-btn" data-tab="scripts" tabindex="-1">Scripts</button>
-    </nav>
-
-    <section id="downloads" class="tab-content" role="tabpanel" aria-labelledby="tab-downloads">
-      <button class="download-btn" data-file="arquivo1.txt" aria-describedby="desc-arq1">Download Arquivo 1</button>
-      <button class="download-btn" data-file="arquivo2.txt" aria-describedby="desc-arq2">Download Arquivo 2</button>
-      <button class="download-btn" data-file="arquivo3.txt" aria-describedby="desc-arq3">Download Arquivo 3</button>
-      <p id="link-container" aria-live="polite" aria-atomic="true"></p>
-    </section>
-
-    <section id="scripts" class="tab-content" role="tabpanel" aria-labelledby="tab-scripts" hidden>
-      <textarea placeholder="Cole seus scripts para desenvolvimento aqui..."></textarea>
-    </section>
-
-  </div>
-
-  <script>
-    // Controle acessível de tabs
-    const tabs = document.querySelectorAll('.tab-btn');
-    const contents = {
-      downloads: document.getElementById('downloads'),
-      scripts: document.getElementById('scripts')
-    };
-
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => activateTab(index));
-      tab.addEventListener('keydown', (e) => {
-        // Navegação por teclado (setas)
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          activateTab((index + 1) % tabs.length);
-          tabs[(index + 1) % tabs.length].focus();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          activateTab((index - 1 + tabs.length) % tabs.length);
-          tabs[(index - 1 + tabs.length) % tabs.length].focus();
-        }
-      });
-    });
-
-    function activateTab(index) {
-      tabs.forEach((t, i) => {
-        const selected = i === index;
-        t.classList.toggle('active', selected);
-        t.setAttribute('aria-selected', selected);
-        t.setAttribute('tabindex', selected ? '0' : '-1');
-        contents[t.getAttribute('data-tab')].hidden = !selected;
-      });
-    }
-
-    // Gerar link de download para arquivos fake
-    function createDownloadLink(filename) {
-      const content = `Conteúdo gerado para ${filename}\nGerado em: ${new Date().toLocaleString()}\n\nDivirta-se!`;
-      const blob = new Blob([content], {type: 'text/plain'});
-      return URL.createObjectURL(blob);
-    }
-
-    const downloadButtons = document.querySelectorAll('.download-btn');
-    const linkContainer = document.getElementById('link-container');
-
-    downloadButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const file = button.getAttribute('data-file');
-        const url = createDownloadLink(file);
-        linkContainer.innerHTML = `<a href="${url}" download="${file}" tabindex="0">Clique aqui para baixar <strong>${file}</strong></a>`;
-        linkContainer.querySelector('a').focus();
-      });
-    });
-
-    // Neve caindo
-    function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.style.left = Math.random() * window.innerWidth + 'px';
-      snowflake.style.fontSize = (12 + Math.random() * 16) + 'px';
-      snowflake.style.animationDuration = (6 + Math.random() * 6) + 's';
-      snowflake.style.opacity = 0.75 + Math.random() * 0.25;
-      snowflake.textContent = '❄';
-
-      document.body.appendChild(snowflake);
-
-      setTimeout(() => {
-        snowflake.remove();
-      }, 12000);
-    }
-
-    setInterval(createSnowflake, 180);
-
-  </script>
-
-</body>
-</html>
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  user-select: none;
+  pointer-events: none;
+  font-size: 1.2rem;
+  z-index: 9999;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 0 1.5px #e6f1ff);
+  opacity: 0.9;
+}
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
